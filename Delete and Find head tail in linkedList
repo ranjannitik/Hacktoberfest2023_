@@ -1,0 +1,129 @@
+public class two {
+    public static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
+
+    }
+
+    public static class linklist {
+        Node head = null;
+        Node tail = null;
+
+        void insertEnd(int value) {
+            Node temp = new Node(value);
+            if (head == null) {
+                head = tail = temp;
+            }
+            tail.next = temp;
+            tail = temp;
+        }
+
+        void insertFirst(int value) {
+            Node temp = new Node(value);
+            if (head == null) {
+                head = tail = temp;
+            }
+
+            temp.next = head;
+            head = temp;
+        }
+
+        void insert(int idx, int value) {
+            Node temp = new Node(value);
+            Node t = head;
+            if (idx == size()) {
+                insertEnd(value);
+                return;
+            } else if (idx == 0) {
+                insertFirst(value);
+                return;
+            } else if (idx < 0 || idx > size()) {
+                System.out.println("Invalid Entry");
+            }
+
+            for (int i = 1; i < idx; i++) {
+                t = t.next;
+            }
+            temp.next = t.next;
+            t.next = temp;
+
+        }
+
+        void delete(int idx) {
+            
+            System.out.println("Deleted index is " + idx);
+            if(idx==0)head=head.next;
+            Node t = head;
+            for (int i = 1; i < idx; i++) {
+                t = t.next;
+            }
+            t.next = t.next.next;
+         if (idx==size())   tail=t;//for making 2nd last element to tail
+
+        }
+
+        void display() {
+            Node temp = head;
+            System.out.print("Link list is [ ");
+            while (temp != null) {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+            System.out.print("]");
+            System.out.println();
+        }
+
+        int size() {
+            Node temp = head;
+            int count = 0;
+            while (temp != null) {
+                count++;
+                temp = temp.next;
+            }
+            return count;
+
+        }
+
+        int getAt(int idx) {
+            Node temp = head;
+            for (int i = 1; i < idx; i++) {
+                temp = temp.next;
+            }
+            return temp.data;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        linklist ll = new linklist();
+        ll.insertEnd(5);
+        ll.insertEnd(6);
+        ll.insertEnd(2);
+        ll.insertFirst(9);
+        ll.insertFirst(10);
+        ll.insert(2, 7);
+        // ll.display();
+        // ll.delete(3);
+        // ll.insertFirst(6);
+        // ll.insertFirst(2);
+         ll.display();
+        ll.delete(0);
+        ll.display();
+        System.out.println("Head is " + ll.head.data);
+        System.out.println("Tail is " + ll.tail.data);
+        
+
+        // System.out.println("Size is " + ll.size());
+        // System.out.println("get value is " + ll.getAt(3));
+
+
+        // also use size as attribute {sout "ll.size" and initialise in linklist and in
+        // intert anywhere size++}
+
+    }
+
+}
